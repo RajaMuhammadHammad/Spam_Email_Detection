@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spam Email Detection Tool</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="/static/js/script.js"></script>
+    <img id="spamChart" style="display: none;" alt="Spam Chart" />
+    
+</head>
+<body>          
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-left">Spam Email Detection</div>
+        <ul class="nav-right">
+            <li><a href="#">Home</a></li>
+            <li><a href="#aboutUsSection">About</a></li>
+            <li><a href="#spamCheckerSection">Spam Checker</a></li>
+            <li><a href="#chartSection">Analysis</a></li>
+            <li><a href="#working">How It Works</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div>
+            <h1>Spam Email Detection Tool</h1>
+            <p>Analyze your emails to determine if they are flagged as spam.</p>
+            <button onclick="document.getElementById('spamCheckerSection').scrollIntoView({ behavior: 'smooth' });">Get Started</button>
+
+             <!-- Google Login Button -->
+             <div class="google-signin-container">
+                <div id="g_id_onload"
+                    data-client_id="83395420658-t39pcu4uj4pj4otvhjg1dj1vm70dig0s.apps.googleusercontent.com"
+                    data-context="signin"
+                    data-ux_mode="popup"
+                    data-callback="handleSignIn"
+                    data-auto_prompt="false">
+                </div>
+                <div class="g_id_signin"
+                    data-type="standard"
+                    data-shape="rectangular"
+                    data-theme="outline"
+                    data-text="signin_with"
+                    data-size="large"
+                    data-logo_alignment="left">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="aboutUsSection">
+        <div class="about-heading-container">
+            <h1 class="about-heading">ABOUT US</h1>
+        </div>
+        <div class="about-container">
+            <div class="section">
+                <h3>Project Overview</h3>
+                <p>
+                    Welcome to the <strong>Email Spam Classifier</strong>, a web application designed to simplify your email management. 
+                    Using advanced machine learning algorithms, our system categorizes your emails into <strong>Spam</strong> and <strong>Ham</strong>, saving you time and ensuring a clutter-free inbox.
+                </p>
+            </div>
+            <div class="section">
+                <h3>Key Features</h3>
+                <ul>
+                    <li>Login securely with Google using OAuth 2.0.</li>
+                    <li>Fetch emails from Gmail inbox using the Gmail API.</li>
+                    <li>You can Classify emails into Spam or Ham with high accuracy by providing email Text.</li>
+                    <li>ML model is implement to classify the email in spam and Ham .</li>
+                </ul>
+            </div>
+            <div class="section">
+                <h3>Meet the Team</h3>
+                <div class="team">
+                    <div class="team-member">
+                        <img src="static\img\Hammad.jpg" alt="Team Lead" class="team-photo">
+                        <h4>Raja Muhammad Hammad</h4>
+                        <p>Backend Developer & ML Engineer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="static\img\Haris.png" alt="Team Member" class="team-photo">
+                        <h4>Muhammad Haris Tahiri</h4>
+                        <p>Frontend Designer & Backend Developer</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="static\img\Abdul Ahad Khan.jpg" alt="Team Member" class="team-photo">
+                        <h4>Abdul Ahad Khan</h4>
+                        <p>API Integration Specialist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Spam Checker Section -->
+    <section id="spamCheckerSection">
+        <div id="spamCheckerSection" class="spamchecker-heading-container">
+            <h1 class="spam-heading">SPAM CHECKER</h1>
+        </div>
+        <div class="main-container">
+            <h2>📧 SPAM EMAIL CHECKER</h2>
+            <textarea id="emailInput" placeholder="Paste your email content here..." class="form-control mb-3" rows="5"></textarea>
+            <button class="btn btn-primary w-100" onclick="checkSpam()">Check Email</button>
+            <div id="result" class="alert mt-4" style="display: none;"></div>
+        </div>
+    </section>
+
+    <section id="chartSection">
+        <div class="spamchecker-heading-container">
+            <h1 class="spam-heading">SPAM EMAIL ANALYSIS</h1>
+        </div>
+        <div class="chart-container">
+            <h2 class="section-heading">Spam vs Ham Email Analysis</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if trend %}
+                        {% for category, count in trend.items() %}
+                            <tr class="{{ 'spam' if category == 'spam' else 'ham' }}">
+                                <td>{{ category }}</td>
+                                <td>{{ count }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="2">No data available.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+                 </div>
+        
+           </section>
+
+
+
+           <section id="working">
+            <div class="about-heading-container">
+                <h1 class="about-heading">HOW TO WORK</h1>
+            </div>
+            <div class="about-container">
+                <div class="section">
+                    <h3>Key Features Which Works Details are Explain Below</h3>
+                    <ul>
+                        <li>Login securely with Google using OAuth 2.0.</li>
+                        <li>Fetch emails from Gmail inbox using the Gmail API.</li>
+                        <li>You can Classify emails into Spam or Ham with high accuracy by providing email Text.</li>
+                    </ul>
+                </div>
+               
+                <div class="section">
+                    <h3>Spam Email Checker</h3>
+                    <p>
+                        "Welcome to the <strong>Email Spam Classifier</strong>, a web application designed to simplify your email management. Using advanced machine learning algorithms, our system categorizes your emails into <strong>Spam</strong> and <strong>Ham</strong>, saving you time and ensuring a clutter-free inbox.
+
+To use the web application, simply click the <strong>Get Started</strong> button on the home page. This will redirect you to the Spam Email Checker. Enter your email text into the provided field, then click on the <strong>Check Email</strong> button. The result will be displayed: if the email is spam, it will appear in red; if it is not, it will appear in green."   
+                    </p>
+                </div>
+                <div class="section">
+                    <h3>Google Login</h3>
+                    <p>
+                        "Welcome to the <strong>Email Spam Classifier</strong>, a web application designed to simplify your email management. Using advanced machine learning algorithms, our system categorizes your emails into <strong>Spam</strong> and <strong>Ham</strong>, saving you time and ensuring a clutter-free inbox.
+
+To use the web application, simply click the <strong>Get Started</strong> button on the home page. This will redirect you to the Spam Email Checker. You will have the option to log in using your <strong>Google Account</strong> by clicking the <strong>Login with Google</strong> button. Once logged in, the application will access your Gmail account to retrieve your email data.
+
+After logging in, enter the email text into the provided field, then click on the <strong>Check Email</strong> button. The result will be displayed: if the email is spam, it will appear in red; if it is not, it will appear in green."   
+                    </p>
+                </div>
+            </div>
+        </section>
+    
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Spam Email Detection System. Built with ❤️ and AI.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+/* General Body Styling */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #495057;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container Setup */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+}
+
+/* Header Section */
+header {
+    margin-bottom: 40px;
+}
+
+h1 {
+    font-size: 48px;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+p.lead {
+    font-size: 18px;
+    color: #6c757d;
+}
+
+/* Email Analysis Card */
+.card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.card h3 {
+    font-size: 24px;
+    color: #343a40;
+    font-weight: 600;
+}
+
+/* Centered Count Display Styling */
+.count-display {
+    font-size: 24px;
+    font-weight: 600;
+    color: #495057;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    margin: 10px 0;
+}
+
+/* Email Table Styling */
+.table {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 12px;
+}
+
+td {
+    font-size: 16px;
+    color: #495057;
+    font-weight: 400;
+    padding: 12px;
+}
+
+.table-striped tbody tr:nth-child(odd) {
+    background-color: #f8f9fa;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Chart Styling */
+#spamChart {
+    margin-top: 30px;
+    border-radius: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 36px;
+    }
+
+    .card h3 {
+        font-size: 20px;
+    }
+
+    .card p {
+        font-size: 16px;
+    }
+
+    .table th, .table td {
+        font-size: 14px;
+    }
+}
+
+/* Hover Effect for Table Rows */
+.table tbody tr:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
+    
